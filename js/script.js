@@ -61,15 +61,18 @@ const getRepoInfo = async function (repoName) {
     const repoInfo = await fetchInfo.json();
     console.log(repoInfo);
     //grabbing languages
-    const fetchLanguages = await fetch (repoInfo.language_url);
+    const fetchLanguages = await fetch(repoInfo.languages_url);
     const languageData = await fetchLanguages.json();
-    
-    const languages = [];
-    for (const languages in languageData);{
-    languages.push(language);}
-    displayRepoInfo(repoInfo, languages);
-};
 
+    // making a list of languages
+    const languages = [];
+    for (const language in languageData) {
+      languages.push(language);
+    }
+  
+    displayRepoInfo(repoInfo, languages);
+  };
+  
 const displayRepoInfo = function (repoInfo, languages) {
     repoData.innerHTML = "";
     repoData.classList.remove("hide");
@@ -83,4 +86,4 @@ const displayRepoInfo = function (repoInfo, languages) {
       <a class="visit" href="${repoInfo.html_url}" target="_blank" rel="noreferrer noopener">View Repo on GitHub!</a>
     `;
     repoData.append(div);
-  };
+};
